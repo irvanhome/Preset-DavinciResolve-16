@@ -1,0 +1,160 @@
+{
+	Tools = ordered() {
+		wipetransitionleft = MacroOperator {
+			Inputs = ordered() {
+				MainInput1 = InstanceInput {
+					SourceOp = "Transform1",
+					Source = "Input",
+				},
+			},
+			Outputs = {
+				Output1 = InstanceOutput {
+					SourceOp = "Path1",
+					Source = "Heading",
+				},
+				MainOutput1 = InstanceOutput {
+					SourceOp = "LensDistort1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = GroupInfo { Pos = { 0, 0 } },
+			Tools = ordered() {
+				Transform1 = Transform {
+					CtrlWZoom = false,
+					Inputs = {
+						MotionBlur = Input { Value = 1, },
+						Center = Input {
+							SourceOp = "Path1",
+							Source = "Position",
+						},
+						Edges = Input { Value = 3, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 196, 47.9697 } },
+				},
+				Path1 = PolyPath {
+					DrawMode = "InsertAndModify",
+					Inputs = {
+						Displacement = Input {
+							SourceOp = "Path1Displacement",
+							Source = "Value",
+						},
+						PolyLine = Input {
+							Value = Polyline {
+								Points = {
+									{ Linear = true, LockY = true, X = 4, Y = 0, RX = -1.33333333333333, RY = 0 },
+									{ Linear = true, LockY = true, X = 0, Y = 0, LX = 1.33333333333333, LY = 0 }
+								}
+							},
+						},
+					},
+				},
+				Path1Displacement = BezierSpline {
+					SplineColor = { Red = 255, Green = 0, Blue = 255 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0, RH = { 10.3, 0.00999999999999999 }, Flags = { Linear = true, LockedY = true } },
+						[14] = { 1, LH = { 4.66, 0.993999999999999 }, Flags = { LockedY = true } }
+					}
+				},
+				LensDistort1 = LensDistort {
+					Inputs = {
+						LensDistortionModel = Input { Value = 1, },
+						["DEClassicLDModel.Distortion"] = Input {
+							SourceOp = "LensDistort1Distortion",
+							Source = "Value",
+						},
+						["DEClassicLDModel.AnamorphicSqueeze"] = Input {
+							SourceOp = "LensDistort1AnamorphicSqueeze",
+							Source = "Value",
+						},
+						["DEClassicLDModel.CurvatureX"] = Input {
+							SourceOp = "LensDistort1CurvatureX",
+							Source = "Value",
+						},
+						["DEClassicLDModel.CurvatureY"] = Input {
+							SourceOp = "LensDistort1CurvatureY",
+							Source = "Value",
+						},
+						["DEClassicLDModel.QuarticDistortion"] = Input {
+							SourceOp = "LensDistort1QuarticDistortion",
+							Source = "Value",
+						},
+						Input = Input {
+							SourceOp = "DirectionalBlur1",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 416, 47.9697 } },
+				},
+				LensDistort1Distortion = BezierSpline {
+					SplineColor = { Red = 41, Green = 243, Blue = 241 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0, RH = { 5.20753778225993, 0.00154373649671737 }, Flags = { Linear = true } },
+						[7] = { 0.5, LH = { 5.41051935875642, 0.421320708258443 }, RH = { 9.10310655264495, 0.42170073488138 } },
+						[14] = { 0, LH = { 8.96025800223687, 0.0010201906878063 } }
+					}
+				},
+				LensDistort1AnamorphicSqueeze = BezierSpline {
+					SplineColor = { Red = 6, Green = 30, Blue = 236 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 1, RH = { 2.33333333333333, 2 }, Flags = { Linear = true } },
+						[7] = { 4, LH = { 4.66666666666667, 3 }, RH = { 9, 3 }, Flags = { Linear = true } },
+						[13] = { 1, LH = { 11, 2 }, Flags = { Linear = true } }
+					}
+				},
+				LensDistort1CurvatureX = BezierSpline {
+					SplineColor = { Red = 31, Green = 106, Blue = 246 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0, RH = { 2.33333333333333, 0.166666666666667 }, Flags = { Linear = true } },
+						[7] = { 0.5, LH = { 4.66666666666667, 0.333333333333333 }, RH = { 9, 0.333333333333333 }, Flags = { Linear = true } },
+						[13] = { 0, LH = { 11, 0.166666666666667 }, Flags = { Linear = true } }
+					}
+				},
+				LensDistort1CurvatureY = BezierSpline {
+					SplineColor = { Red = 31, Green = 186, Blue = 246 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0, RH = { 2.33333333333333, 0.166666666666667 }, Flags = { Linear = true } },
+						[7] = { 0.5, LH = { 4.66666666666667, 0.333333333333333 }, RH = { 9, 0.333333333333333 }, Flags = { Linear = true } },
+						[13] = { 0, LH = { 11, 0.166666666666667 }, Flags = { Linear = true } }
+					}
+				},
+				LensDistort1QuarticDistortion = BezierSpline {
+					SplineColor = { Red = 227, Green = 240, Blue = 29 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0, RH = { 2.33333333333333, 0.166666666666667 }, Flags = { Linear = true } },
+						[7] = { 0.5, LH = { 4.66666666666667, 0.333333333333333 }, RH = { 9, 0.333333333333333 }, Flags = { Linear = true } },
+						[13] = { 0, LH = { 11, 0.166666666666667 }, Flags = { Linear = true } }
+					}
+				},
+				DirectionalBlur1 = DirectionalBlur {
+					Inputs = {
+						Length = Input {
+							SourceOp = "DirectionalBlur1Length",
+							Source = "Value",
+						},
+						Input = Input {
+							SourceOp = "Transform1",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 306, 47.9697 } },
+				},
+				DirectionalBlur1Length = BezierSpline {
+					SplineColor = { Red = 141, Green = 167, Blue = 243 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0, RH = { 5.94, 0.0015 }, Flags = { Linear = true } },
+						[7] = { 0.3, LH = { 6.16, 0.259 }, RH = { 8.07666857032991, 0.259369724873171 } },
+						[14] = { -0.01, LH = { 8.8, -0.01 } }
+					}
+				}
+			},
+		}
+	},
+	ActiveTool = "wipetransitionleft"
+}

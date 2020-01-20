@@ -1,0 +1,264 @@
+{
+	Tools = ordered() {
+		smokedissolve = MacroOperator {
+			Inputs = ordered() {
+				Input1 = InstanceInput {
+					SourceOp = "FastNoise1",
+					Source = "Seethe",
+					Default = 0,
+				},
+				MainInput1 = InstanceInput {
+					SourceOp = "BrightnessContrast1",
+					Source = "Input",
+				},
+				Input2 = InstanceInput {
+					SourceOp = "ColorCorrector1",
+					Source = "WheelTintAngle1",
+					ControlGroup = 3,
+					Default = 0.5013839211461,
+				},
+				Input3 = InstanceInput {
+					SourceOp = "ColorCorrector1",
+					Source = "WheelTintLength1",
+					ControlGroup = 3,
+					Default = 1,
+				},
+			},
+			Outputs = {
+				MainOutput1 = InstanceOutput {
+					SourceOp = "Merge1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = GroupInfo { Pos = { 0, 0 } },
+			Tools = ordered() {
+				Merge1 = Merge {
+					Inputs = {
+						Background = Input {
+							SourceOp = "ColorCorrector1",
+							Source = "Output",
+						},
+						Foreground = Input {
+							SourceOp = "BrightnessContrast1",
+							Source = "Output",
+						},
+						PerformDepthMerge = Input { Value = 0, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 1166.67, 126.758 } },
+				},
+				pTurbulence1 = pTurbulence {
+					ID = 2,
+					Inputs = {
+						XStrength = Input { Value = 1, },
+						YStrength = Input { Value = 1, },
+						ZStrength = Input { Value = 1, },
+						StrengthOverLifeLUT = Input {
+							SourceOp = "pTurbulence1StrengthoverLifeLUT",
+							Source = "Value",
+						},
+						Input = Input {
+							SourceOp = "pDirectionalForce1",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 854.667, 254.03 } },
+				},
+				pTurbulence1StrengthoverLifeLUT = LUTBezier {
+					KeyColorSplines = {
+						[0] = {
+							[0] = { 0.5, RH = { 0.333333333333333, 0.5 }, Flags = { Linear = true } },
+							[1] = { 0.5, LH = { 0.666666666666667, 0.5 }, Flags = { Linear = true } }
+						}
+					},
+					SplineColor = { Red = 192, Green = 128, Blue = 64 },
+				},
+				pDirectionalForce1 = pDirectionalForce {
+					ID = 4,
+					Inputs = {
+						Direction = Input { Value = 90, },
+						Input = Input {
+							SourceOp = "pEmitter1",
+							Source = "Output",
+						},
+						StartAge = Input { Value = 0.28, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 744.667, 254.03 } },
+				},
+				pEmitter1 = pEmitter {
+					ID = 5,
+					Inputs = {
+						["BezierRgn.Polyline"] = Input {
+							Value = Polyline {
+							},
+						},
+						Number = Input { Value = 110, },
+						Lifespan = Input { Value = 40, },
+						VelocityControls = Input { Value = 1, },
+						RotationControls = Input { Value = 1, },
+						Region = Input { Value = FuID { "BitmapRgn" }, },
+						["ParticleStyle.SizeOverLife"] = Input {
+							SourceOp = "pEmitter1SizeoverLife",
+							Source = "Value",
+						},
+						["ParticleStyle.BlurOverLife"] = Input {
+							SourceOp = "pEmitter1BluroverLife2D",
+							Source = "Value",
+						},
+						["BitmapRgn.Bitmap"] = Input {
+							SourceOp = "MatteControl1",
+							Source = "Output",
+						},
+						["BitmapRgn.Low"] = Input { Value = 0.097, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 634.667, 254.03 } },
+				},
+				pEmitter1SizeoverLife = LUTBezier {
+					KeyColorSplines = {
+						[0] = {
+							[0] = { 0.5, RH = { 0.333333333333333, 0.5 }, Flags = { Linear = true } },
+							[1] = { 0.5, LH = { 0.666666666666667, 0.5 }, Flags = { Linear = true } }
+						}
+					},
+					SplineColor = { Red = 192, Green = 128, Blue = 64 },
+				},
+				pEmitter1BluroverLife2D = LUTBezier {
+					KeyColorSplines = {
+						[0] = {
+							[0] = { 0.5, RH = { 0.333333333333333, 0.5 }, Flags = { Linear = true } },
+							[1] = { 0.5, LH = { 0.666666666666667, 0.5 }, Flags = { Linear = true } }
+						}
+					},
+					SplineColor = { Red = 192, Green = 128, Blue = 64 },
+				},
+				FastNoise1 = FastNoise {
+					CtrlWZoom = false,
+					Inputs = {
+						ApplyMaskInverted = Input { Value = 1, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						Detail = Input { Value = 14.02, },
+						Contrast = Input { Value = 4.43, },
+						Brightness = Input {
+							SourceOp = "FastNoise1Brightness",
+							Source = "Value",
+						},
+						XScale = Input { Value = 10.71, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 420, 28.5758 } },
+				},
+				FastNoise1Brightness = BezierSpline {
+					SplineColor = { Red = 27, Green = 111, Blue = 232 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { -5, RH = { 66.6666666666667, -1.3 }, Flags = { Linear = true } },
+						[200] = { 6.1, LH = { 133.333333333333, 2.4 }, Flags = { Linear = true } }
+					}
+				},
+				BrightnessContrast1 = BrightnessContrast {
+					Inputs = {
+						Alpha = Input { Value = 1, },
+						Gain = Input { Value = 0, },
+						EffectMask = Input {
+							SourceOp = "FastNoise1",
+							Source = "Output",
+						}
+					},
+					ViewInfo = OperatorInfo { Pos = { 416, 137.061 } },
+				},
+				MatteControl1 = MatteControl {
+					Inputs = {
+						["Garbage.Matte"] = Input {
+							SourceOp = "BrightnessContrast1",
+							Source = "Output",
+						},
+						Background = Input {
+							SourceOp = "ErodeDilate1",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 461.333, 255.242 } },
+				},
+				ColorCorrector1 = ColorCorrector {
+					Inputs = {
+						WheelTintAngle1 = Input { Value = 0.5013839211461, },
+						WheelTintLength1 = Input { Value = 1, },
+						ColorRanges = Input {
+							Value = ColorCurves {
+								Curves = {
+									{
+										Points = {
+											{ 0, 1 },
+											{ 0.4, 0.2 },
+											{ 0.6, 0 },
+											{ 1, 0 }
+										}
+									},
+									{
+										Points = {
+											{ 0, 0 },
+											{ 0.4, 0 },
+											{ 0.6, 0.2 },
+											{ 1, 1 }
+										}
+									}
+								}
+							},
+						},
+						HistogramIgnoreTransparent = Input { Value = 1, },
+						Input = Input {
+							SourceOp = "pRender1",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 1103.33, 257.061 } },
+				},
+				pRender1 = pRender {
+					CustomData = { Settings = { [1] = { Tools = ordered() { pRender1 = pRender { Inputs = { IntegrationMethod = Input { Value = FuID { "RK4" } }, Glow = Input { Value = 0.701 }, Blur = Input { Value = 5 }, ["MaterialID.Nest"] = Input { Value = 1 }, OutputMode = Input { Value = FuID { "TwoD" }, Disabled = true }, OnlyRenderInHiQ = Input { Value = 1 }, MotionBlur = Input { Value = 1 }, ["MaterialID.MaterialID"] = Input { Value = 1 }, KillParticlesThatLeaveTheView = Input { Value = 1 }, Width = Input { Value = 1920 }, ["ObjectID.ObjectID"] = Input { Value = 1 }, ["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" } }, ["ObjectID.Nest"] = Input { Value = 1 }, GlobalOut = Input { Value = 239 }, Height = Input { Value = 1080 }, Input = Input { SourceOp = "pTurbulence1", Source = "Output" }, UseFrameFormatSettings = Input { Value = 1 }, _MotionBlurWarning = Input { Disabled = true } }, Name = "pRender1", CtrlWZoom = false, ViewInfo = OperatorInfo { Pos = { 993.333, 257.061 } }, CustomData = {
+										} } } }, [2] = { Tools = ordered() { pRender1 = pRender { Inputs = { IntegrationMethod = Input { Value = FuID { "RK4" } }, Glow = Input { Value = 0.701 }, Blur = Input { Value = 5 }, ["MaterialID.Nest"] = Input { Value = 1 }, OutputMode = Input { Value = FuID { "TwoD" }, Disabled = true }, OnlyRenderInHiQ = Input { Value = 1 }, MotionBlur = Input { Value = 1 }, ["MaterialID.MaterialID"] = Input { Value = 1 }, KillParticlesThatLeaveTheView = Input { Value = 1 }, Width = Input { Value = 1920 }, ["ObjectID.ObjectID"] = Input { Value = 1 }, ["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" } }, ["ObjectID.Nest"] = Input { Value = 1 }, GlobalOut = Input { Value = 239 }, Height = Input { Value = 1080 }, Input = Input { SourceOp = "pTurbulence1", Source = "Output" }, UseFrameFormatSettings = Input { Value = 1 }, _MotionBlurWarning = Input { Disabled = true } }, CtrlWZoom = false, ViewInfo = OperatorInfo { Pos = { 993.333, 257.061 } }, CustomData = {
+										} } } }, [3] = { Tools = ordered() { pRender1 = pRender { Inputs = { IntegrationMethod = Input { Value = FuID { "RK4" } }, Glow = Input { Value = 0.701 }, Blur = Input { Value = 5 }, ["MaterialID.Nest"] = Input { Value = 1 }, OutputMode = Input { Value = FuID { "TwoD" }, Disabled = true }, OnlyRenderInHiQ = Input { Value = 1 }, MotionBlur = Input { Value = 1 }, ["MaterialID.MaterialID"] = Input { Value = 1 }, KillParticlesThatLeaveTheView = Input { Value = 1 }, Width = Input { Value = 1920 }, ["ObjectID.ObjectID"] = Input { Value = 1 }, ["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" } }, ["ObjectID.Nest"] = Input { Value = 1 }, GlobalOut = Input { Value = 239 }, Height = Input { Value = 1080 }, Input = Input { SourceOp = "pTurbulence1", Source = "Output" }, UseFrameFormatSettings = Input { Value = 1 }, _MotionBlurWarning = Input { Disabled = true } }, CtrlWZoom = false, ViewInfo = OperatorInfo { Pos = { 993.333, 257.061 } }, CustomData = {
+										} } } }, } },
+					Inputs = {
+						MotionBlur = Input { Value = 1, },
+						_MotionBlurWarning = Input { Disabled = true, },
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						Depth = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						OutputMode = Input {
+							Value = FuID { "TwoD" },
+							Disabled = true,
+						},
+						Blur = Input { Value = 5, },
+						Glow = Input { Value = 0.7, },
+						IntegrationMethod = Input { Value = FuID { "RK4" }, },
+						KillParticlesThatLeaveTheView = Input { Value = 1, },
+						["MaterialID.Nest"] = Input { Value = 1, },
+						["MaterialID.MaterialID"] = Input { Value = 1, },
+						["ObjectID.Nest"] = Input { Value = 1, },
+						["ObjectID.ObjectID"] = Input { Value = 1, },
+						Input = Input {
+							SourceOp = "pTurbulence1",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 993.333, 257.061 } },
+				},
+				ErodeDilate1 = ErodeDilate {
+					Inputs = {
+						Filter = Input { Value = 2, },
+						XAmount = Input { Value = -0.0048, },
+						Input = Input {
+							SourceOp = "BrightnessContrast1",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 325.333, 254.909 } },
+				}
+			},
+		}
+	},
+	ActiveTool = "smokedissolve"
+}

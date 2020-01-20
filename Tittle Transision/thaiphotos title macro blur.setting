@@ -1,0 +1,123 @@
+{
+	Tools = ordered() {
+		thaiphotostitlemacroblur = MacroOperator {
+			Inputs = ordered() {
+				Input1 = InstanceInput {
+					SourceOp = "Template",
+					Source = "StyledText",
+				},
+				Input2 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Font",
+					ControlGroup = 2,
+				},
+				Input3 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Style",
+					ControlGroup = 2,
+				},
+				Input4 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Red1Clone",
+					Name = "Color",
+					ControlGroup = 3,
+					Default = 1,
+				},
+				Input5 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Green1Clone",
+					ControlGroup = 3,
+					Default = 1,
+				},
+				Input6 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Blue1Clone",
+					ControlGroup = 3,
+					Default = 1,
+				},
+				Input7 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Alpha1Clone",
+					ControlGroup = 3,
+					Default = 1,
+				},
+				Input8 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Size",
+					Default = 0.25,
+				},
+			},
+			Outputs = {
+				MainOutput1 = InstanceOutput {
+					SourceOp = "Blur1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = GroupInfo { Pos = { 0, 0 } },
+			Tools = ordered() {
+				Blur1 = Blur {
+					Inputs = {
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						XBlurSize = Input {
+							SourceOp = "Blur1BlurSize",
+							Source = "Value",
+						},
+						Input = Input {
+							SourceOp = "Template",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 190.667, 31.0455 } },
+				},
+				Blur1BlurSize = BezierSpline {
+					SplineColor = { Red = 18, Green = 240, Blue = 11 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 100, RH = { 24, 100 } },
+						[72] = { 0, LH = { 48, 0 }, RH = { 172, 0 } },
+						[372] = { 0, LH = { 272, 0 }, RH = { 396, 33.3333333333333 }, Flags = { Linear = true } },
+						[444] = { 100, LH = { 420, 66.6666666666667 }, Flags = { Linear = true } }
+					}
+				},
+				Template = TextPlus {
+					CtrlWZoom = false,
+					Inputs = {
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						CharacterSpacing = Input {
+							SourceOp = "TemplateCharacterSpacing",
+							Source = "Value",
+						},
+						StyledText = Input { Value = "free", },
+						Font = Input { Value = "Bebas Neue", },
+						Style = Input { Value = "Regular", },
+						Size = Input { Value = 0.25, },
+						VerticalJustificationNew = Input { Value = 3, },
+						HorizontalJustificationNew = Input { Value = 3, },
+						AdvancedFontControls = Input { Value = 1, },
+						ManualFontKerningPlacement = Input {
+							Value = StyledText {
+								Array = {
+								},
+								Value = ""
+							},
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 45.3333, 31.0455 } },
+				},
+				TemplateCharacterSpacing = BezierSpline {
+					SplineColor = { Red = 28, Green = 216, Blue = 243 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0.9, RH = { 24.0156148324647, 0.950032530900968 }, Flags = { Linear = true } },
+						[72] = { 1.1, LH = { 48, 1.1 }, RH = { 172, 1.1 } },
+						[372] = { 1.1, LH = { 272, 1.1 }, RH = { 396, 1.11666666666667 }, Flags = { Linear = true } },
+						[444] = { 1.15, LH = { 420, 1.13333333333333 }, Flags = { Linear = true } }
+					}
+				}
+			},
+		}
+	},
+	ActiveTool = "thaiphotostitlemacroblur"
+}

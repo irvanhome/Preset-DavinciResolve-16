@@ -1,0 +1,96 @@
+{
+	Tools = ordered() {
+		thaiphotoszoomouttransitionpart2 = MacroOperator {
+			Inputs = ordered() {
+				MainInput1 = InstanceInput {
+					SourceOp = "Transform1",
+					Source = "Input",
+				},
+			},
+			Outputs = {
+				MainOutput1 = InstanceOutput {
+					SourceOp = "DirectionalBlur1",
+					Source = "Output",
+				},
+				Output1 = InstanceOutput {
+					SourceOp = "Path1",
+					Source = "Heading",
+				}
+			},
+			ViewInfo = GroupInfo { Pos = { 0, 0 } },
+			Tools = ordered() {
+				DirectionalBlur1 = DirectionalBlur {
+					Inputs = {
+						Type = Input { Value = 3, },
+						Length = Input {
+							SourceOp = "DirectionalBlur1Length",
+							Source = "Value",
+						},
+						Input = Input {
+							SourceOp = "Transform1",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 371.667, 48.2879 } },
+				},
+				DirectionalBlur1Length = BezierSpline {
+					SplineColor = { Red = 141, Green = 167, Blue = 243 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0.07, RH = { 1.44368451420678, 0.0469818133399198 }, Flags = { Linear = true } },
+						[6] = { 0, LH = { 3.425, 4.99999999999999e-005 } }
+					}
+				},
+				Transform1 = Transform {
+					CtrlWZoom = false,
+					Inputs = {
+						MotionBlur = Input { Value = 1, },
+						Center = Input {
+							SourceOp = "Path1",
+							Source = "Position",
+						},
+						Size = Input {
+							SourceOp = "Transform1Size",
+							Source = "Value",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 261.667, 48.2879 } },
+				},
+				Path1 = PolyPath {
+					DrawMode = "InsertAndModify",
+					CtrlWZoom = false,
+					Inputs = {
+						Displacement = Input {
+							SourceOp = "Path1Displacement",
+							Source = "Value",
+						},
+						PolyLine = Input {
+							Value = Polyline {
+								Points = {
+									{ Linear = true, LockY = true, X = 0, Y = 0 }
+								}
+							},
+						},
+					},
+				},
+				Path1Displacement = BezierSpline {
+					SplineColor = { Red = 255, Green = 0, Blue = 255 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0, Flags = { Linear = true, LockedY = true } }
+					}
+				},
+				Transform1Size = BezierSpline {
+					SplineColor = { Red = 225, Green = 0, Blue = 157 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 1.3, RH = { 1.23181539339611, 1.03468591526853 }, Flags = { Linear = true } },
+						[5.974] = { 0.996017692573328, LH = { 3.05, 1 }, RH = { 5.98268457514867, 0.996005897686737 } },
+						[6] = { 0.995999999999999, LH = { 5.99133580713435, 0.996005672983423 } }
+					}
+				}
+			},
+		}
+	},
+	ActiveTool = "thaiphotoszoomouttransitionpart2"
+}

@@ -1,0 +1,175 @@
+{
+	Tools = ordered() {
+		thaiphotosscanlinetransition = MacroOperator {
+			Inputs = ordered() {
+				MainInput1 = InstanceInput {
+					SourceOp = "Scanlines1",
+					Source = "Source",
+				},
+			},
+			Outputs = {
+				MainOutput1 = InstanceOutput {
+					SourceOp = "PrismBlur1",
+					Source = "Output",
+				},
+				Output1 = InstanceOutput {
+					SourceOp = "Shake1",
+					Source = "Position",
+				},
+				Output2 = InstanceOutput {
+					SourceOp = "Shake1",
+					Source = "Y",
+				}
+			},
+			ViewInfo = GroupInfo { Pos = { 0, 0 } },
+			Tools = ordered() {
+				PrismBlur1 = ofx.com.blackmagicdesign.resolvefx.prismblur {
+					Inputs = {
+						Source = Input {
+							SourceOp = "LensDistort1",
+							Source = "Output",
+						},
+						BlurStrength = Input {
+							SourceOp = "PrismBlur1BlurStrength",
+							Source = "Value",
+						},
+						CenterXPos = Input { Value = 0.5, },
+						CenterYPos = Input { Value = 0.5, },
+						AberrationDistance = Input { Value = 0.055, },
+						AberrationStrength = Input {
+							SourceOp = "PrismBlur1AberrationStrength",
+							Source = "Value",
+						},
+						VignetteSize = Input { Value = 0.100000001490116, },
+						VignetteSharpness = Input { Value = 5, },
+						BlendAmount = Input { Value = 0, },
+						blendGroup = Input { Value = 1, },
+						blend = Input { Value = 0, },
+						ignoreContentShape = Input { Value = 0, },
+						resolvefxVersion = Input { Value = "2.2", },
+					},
+					ViewInfo = OperatorInfo { Pos = { 543.667, 47.0758 } },
+				},
+				PrismBlur1BlurStrength = BezierSpline {
+					SplineColor = { Red = 18, Green = 240, Blue = 234 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0, RH = { 4, 0.0666666676600774 }, Flags = { Linear = true } },
+						[12] = { 0.200000002980232, LH = { 8, 0.133333335320155 }, RH = { 16, 0.133333335320155 }, Flags = { Linear = true } },
+						[24] = { 0, LH = { 20, 0.0666666676600774 }, Flags = { Linear = true } }
+					}
+				},
+				PrismBlur1AberrationStrength = BezierSpline {
+					SplineColor = { Red = 0, Green = 139, Blue = 243 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0.400000005960464, RH = { 4, 0.542333337306976 }, Flags = { Linear = true } },
+						[12] = { 0.827, LH = { 8, 0.684666668653488 }, RH = { 16, 0.684666668653488 }, Flags = { Linear = true } },
+						[24] = { 0.400000005960464, LH = { 20, 0.542333337306976 }, Flags = { Linear = true } }
+					}
+				},
+				LensDistort1 = LensDistort {
+					Inputs = {
+						LensDistortionModel = Input { Value = 1, },
+						["DEClassicLDModel.Distortion"] = Input {
+							SourceOp = "LensDistort1Distortion",
+							Source = "Value",
+						},
+						["DEClassicLDModel.AnamorphicSqueeze"] = Input {
+							SourceOp = "LensDistort1AnamorphicSqueeze",
+							Source = "Value",
+						},
+						Input = Input {
+							SourceOp = "Scanlines1",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 402.333, 48.2879 } },
+				},
+				LensDistort1Distortion = BezierSpline {
+					SplineColor = { Red = 41, Green = 243, Blue = 241 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0, RH = { 10.6, 0 }, Flags = { Linear = true } },
+						[12] = { 0.413, LH = { 8, 0.275333333333333 }, RH = { 16, 0.275333333333333 } },
+						[24] = { 0, LH = { 13.5, 0 } }
+					}
+				},
+				LensDistort1AnamorphicSqueeze = BezierSpline {
+					SplineColor = { Red = 6, Green = 109, Blue = 236 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 1, RH = { 9.7, 0.995999999999999 }, Flags = { Linear = true } },
+						[12] = { 0.25, LH = { 8, 0.5 }, RH = { 16, 0.5 } },
+						[24] = { 1, LH = { 13.3, 0.987999999999999 } }
+					}
+				},
+				Scanlines1 = ofx.com.blackmagicdesign.resolvefx.scanlinev2 {
+					CtrlWZoom = false,
+					Inputs = {
+						appearanceGroup = Input { Value = 1, },
+						frequency = Input {
+							SourceOp = "Shake1",
+							Source = "X",
+						},
+						sharpness = Input { Value = 2, },
+						angle = Input { Value = 0, },
+						width = Input {
+							SourceOp = "Scanlines1LineWidth",
+							Source = "Value",
+						},
+						shift = Input { Value = 1, },
+						colorGroup = Input { Value = 1, },
+						color1Red = Input { Value = 1, },
+						color1Green = Input { Value = 1, },
+						color1Blue = Input { Value = 1, },
+						color2Red = Input { Value = 0, },
+						color2Green = Input { Value = 0, },
+						color2Blue = Input { Value = 0, },
+						phaseOffR = Input { Value = 0, },
+						phaseOffG = Input { Value = 0, },
+						phaseOffB = Input { Value = 0, },
+						compositeGroup = Input { Value = 1, },
+						LinesOnly = Input { Value = 0, },
+						CompositeType = Input { Value = FuID { "COMPOSITE_OVERLAY" }, },
+						blendGroup = Input { Value = 1, },
+						blend = Input {
+							SourceOp = "Scanlines1Blend",
+							Source = "Value",
+						},
+						ignoreContentShape = Input { Value = 0, },
+						resolvefxVersion = Input { Value = "1.0", },
+					},
+					ViewInfo = OperatorInfo { Pos = { 249.667, 47.0758 } },
+				},
+				Shake1 = Shake {
+					CtrlWZoom = false,
+					Inputs = {
+						Smoothness = Input { Value = 6.69, },
+						XMinimum = Input { Value = 9, },
+						XMaximum = Input { Value = 11, },
+					},
+				},
+				Scanlines1LineWidth = BezierSpline {
+					SplineColor = { Red = 229, Green = 95, Blue = 74 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0.591, RH = { 4, 0.727333333333333 }, Flags = { Linear = true } },
+						[12] = { 1, LH = { 8, 0.863666666666667 }, RH = { 16, 0.863666666666667 }, Flags = { Linear = true } },
+						[24] = { 0.591, LH = { 20, 0.727333333333333 }, Flags = { Linear = true } }
+					}
+				},
+				Scanlines1Blend = BezierSpline {
+					SplineColor = { Red = 205, Green = 205, Blue = 205 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 1, RH = { 4, 0.666666666666667 }, Flags = { Linear = true } },
+						[12] = { 0, LH = { 8, 0.333333333333333 }, RH = { 16, 0.333333333333333 }, Flags = { Linear = true } },
+						[24] = { 1, LH = { 20, 0.666666666666667 }, Flags = { Linear = true } }
+					}
+				}
+			},
+		}
+	},
+	ActiveTool = "thaiphotosscanlinetransition"
+}

@@ -1,0 +1,207 @@
+{
+	Tools = ordered() {
+		thaiphotostitlemacrorays = MacroOperator {
+			Inputs = ordered() {
+				Input1 = InstanceInput {
+					SourceOp = "Template",
+					Source = "StyledText",
+				},
+				Input2 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Font",
+					ControlGroup = 2,
+				},
+				Input3 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Style",
+					ControlGroup = 2,
+				},
+				Input4 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Red1Clone",
+					Name = "Color",
+					ControlGroup = 3,
+					Default = 1,
+				},
+				Input5 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Green1Clone",
+					ControlGroup = 3,
+					Default = 1,
+				},
+				Input6 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Blue1Clone",
+					ControlGroup = 3,
+					Default = 1,
+				},
+				Input7 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Alpha1Clone",
+					ControlGroup = 3,
+					Default = 1,
+				},
+				Input8 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Size",
+					Default = 0.25,
+				},
+			},
+			Outputs = {
+				MainOutput1 = InstanceOutput {
+					SourceOp = "Rays1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = GroupInfo { Pos = { 0, 0 } },
+			Tools = ordered() {
+				Rays1 = Fuse.OCLRays {
+					Inputs = {
+						Weight = Input {
+							SourceOp = "Rays1Weight",
+							Source = "Value",
+						},
+						Exposure = Input {
+							SourceOp = "Rays1Exposure",
+							Source = "Value",
+						},
+						Threshold = Input { Value = 0, },
+						Image = Input {
+							SourceOp = "PrismBlur1",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 319.333, 33.4243 } },
+				},
+				Rays1Weight = BezierSpline {
+					SplineColor = { Red = 248, Green = 92, Blue = 85 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 3, RH = { 27.3333333333333, 3 }, Flags = { Linear = true } },
+						[82] = { 3, LH = { 54.6666666666667, 3 }, Flags = { Linear = true } }
+					}
+				},
+				Rays1Exposure = BezierSpline {
+					SplineColor = { Red = 77, Green = 235, Blue = 8 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 1, RH = { 17.6666666666667, 1 }, Flags = { Linear = true } },
+						[53] = { 1, LH = { 35.3333333333333, 1 }, RH = { 68.6666666666667, 0.666666666666667 }, Flags = { Linear = true } },
+						[100] = { 0, LH = { 84.3333333333333, 0.333333333333333 }, RH = { 190.666666666667, 0 }, Flags = { Linear = true } },
+						[372] = { 0, LH = { 281.333333333333, 0 }, RH = { 385.666666666667, 0.333333333333333 }, Flags = { Linear = true } },
+						[413] = { 1, LH = { 399.333333333333, 0.666666666666667 }, Flags = { Linear = true } }
+					}
+				},
+				PrismBlur1 = ofx.com.blackmagicdesign.resolvefx.prismblur {
+					Inputs = {
+						Source = Input {
+							SourceOp = "Template",
+							Source = "Output",
+						},
+						BlurStrength = Input {
+							SourceOp = "PrismBlur1BlurStrength",
+							Source = "Value",
+						},
+						CenterXPos = Input { Value = 0.5, },
+						CenterYPos = Input { Value = 0.5, },
+						AberrationDistance = Input {
+							SourceOp = "PrismBlur1AberrationDistance",
+							Source = "Value",
+						},
+						AberrationStrength = Input {
+							SourceOp = "PrismBlur1AberrationStrength",
+							Source = "Value",
+						},
+						VignetteSize = Input { Value = 0.100000001490116, },
+						VignetteSharpness = Input { Value = 4.88, },
+						BlendAmount = Input { Value = 0, },
+						blendGroup = Input { Value = 1, },
+						blend = Input { Value = 0, },
+						ignoreContentShape = Input { Value = 0, },
+						resolvefxVersion = Input { Value = "2.2", },
+					},
+					ViewInfo = OperatorInfo { Pos = { 178, 32.8182 } },
+				},
+				PrismBlur1BlurStrength = BezierSpline {
+					SplineColor = { Red = 18, Green = 187, Blue = 240 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0.283, RH = { 24, 0.188666666666667 }, Flags = { Linear = true } },
+						[72] = { 0, LH = { 48, 0.0943333333333333 }, Flags = { Linear = true } }
+					}
+				},
+				PrismBlur1AberrationDistance = BezierSpline {
+					SplineColor = { Red = 0, Green = 139, Blue = 243 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0.63, RH = { 24, 0.42 }, Flags = { Linear = true } },
+						[72] = { 0, LH = { 48, 0.21 }, RH = { 172, 0 }, Flags = { Linear = true } },
+						[372] = { 0, LH = { 272, 0 }, RH = { 396, 0.21 }, Flags = { Linear = true } },
+						[444] = { 0.63, LH = { 420, 0.42 }, Flags = { Linear = true } }
+					}
+				},
+				PrismBlur1AberrationStrength = BezierSpline {
+					SplineColor = { Red = 0, Green = 222, Blue = 243 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0.661, RH = { 24, 0.661 }, Flags = { Linear = true } },
+						[72] = { 0.661, LH = { 48, 0.661 }, RH = { 172, 0.661 }, Flags = { Linear = true } },
+						[372] = { 0.661, LH = { 272, 0.661 }, Flags = { Linear = true } }
+					}
+				},
+				Template = TextPlus {
+					CtrlWZoom = false,
+					Inputs = {
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						CharacterSpacing = Input {
+							SourceOp = "TemplateCharacterSpacing",
+							Source = "Value",
+						},
+						Opacity1 = Input {
+							SourceOp = "TemplateOpacity",
+							Source = "Value",
+						},
+						StyledText = Input { Value = "FREE", },
+						Font = Input { Value = "Berlin Sans FB Demi", },
+						Style = Input { Value = "Bold", },
+						Size = Input { Value = 0.25, },
+						VerticalJustificationNew = Input { Value = 3, },
+						HorizontalJustificationNew = Input { Value = 3, },
+						AdvancedFontControls = Input { Value = 1, },
+						ManualFontKerningPlacement = Input {
+							Value = StyledText {
+								Array = {
+								},
+								Value = ""
+							},
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 45.3333, 31.0455 } },
+				},
+				TemplateCharacterSpacing = BezierSpline {
+					SplineColor = { Red = 28, Green = 216, Blue = 243 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0.9, RH = { 24.0156148324647, 0.950032530900968 }, Flags = { Linear = true } },
+						[72] = { 1.1, LH = { 48, 1.1 }, RH = { 172, 1.1 } },
+						[372] = { 1.1, LH = { 272, 1.1 }, RH = { 396, 1.11666666666667 }, Flags = { Linear = true } },
+						[444] = { 1.15, LH = { 420, 1.13333333333333 }, Flags = { Linear = true } }
+					}
+				},
+				TemplateOpacity = BezierSpline {
+					SplineColor = { Red = 179, Green = 28, Blue = 244 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0, RH = { 24, 0.333333333333333 }, Flags = { Linear = true } },
+						[72] = { 1, LH = { 48, 0.666666666666667 }, RH = { 172, 1 }, Flags = { Linear = true } },
+						[372] = { 1, LH = { 272, 1 }, RH = { 396, 0.666666666666667 }, Flags = { Linear = true } },
+						[444] = { 0, LH = { 420, 0.333333333333333 }, Flags = { Linear = true } }
+					}
+				}
+			},
+		}
+	},
+	ActiveTool = "thaiphotostitlemacrorays"
+}

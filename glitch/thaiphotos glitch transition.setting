@@ -1,0 +1,197 @@
+{
+	Tools = ordered() {
+		thaiphotosglitchtransition = MacroOperator {
+			Inputs = ordered() {
+				MainInput1 = InstanceInput {
+					SourceOp = "ColorCurves1",
+					Source = "Input",
+				},
+				Input1 = InstanceInput {
+					SourceOp = "Transform1",
+					Source = "ProcessRed",
+					Name = "Red",
+					Default = 0,
+				},
+				Input2 = InstanceInput {
+					SourceOp = "Transform1",
+					Source = "ProcessGreen",
+					Name = "Green",
+					Default = 1,
+				},
+				Input3 = InstanceInput {
+					SourceOp = "Transform1",
+					Source = "ProcessBlue",
+					Name = "Blue",
+					Default = 1,
+				},
+				MainInput2 = InstanceInput {
+					SourceOp = "Displace1",
+					Source = "Input",
+				},
+			},
+			Outputs = {
+				MainOutput1 = InstanceOutput {
+					SourceOp = "Transform1",
+					Source = "Output",
+				},
+				Output1 = InstanceOutput {
+					SourceOp = "Shake3",
+					Source = "X",
+				},
+				Output2 = InstanceOutput {
+					SourceOp = "Shake3",
+					Source = "Y",
+				},
+				Output3 = InstanceOutput {
+					SourceOp = "Shake2",
+					Source = "Position",
+				},
+				Output4 = InstanceOutput {
+					SourceOp = "Shake2",
+					Source = "Y",
+				},
+				Output5 = InstanceOutput {
+					SourceOp = "Shake1",
+					Source = "Position",
+				},
+				Output6 = InstanceOutput {
+					SourceOp = "Shake1",
+					Source = "Y",
+				}
+			},
+			ViewInfo = GroupInfo { Pos = { 0, 0 } },
+			Tools = ordered() {
+				ColorCurves1 = ColorCurves {
+					PickColor = true,
+					CtrlWZoom = false,
+					Inputs = {
+						Red = Input {
+							SourceOp = "ColorCurves1Red",
+							Source = "Value",
+						},
+						Green = Input {
+							SourceOp = "ColorCurves1Green",
+							Source = "Value",
+						},
+						Blue = Input {
+							SourceOp = "ColorCurves1Blue",
+							Source = "Value",
+						},
+						Alpha = Input {
+							SourceOp = "ColorCurves1Alpha",
+							Source = "Value",
+						},
+						NumberOfSamplesOnMatchCurve = Input { Value = 64, },
+						IgnoreTransparent = Input { Value = 1, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 241, 38.697 } },
+					Tools = {
+						ColorCurves1Red = LUTBezier {
+							KeyColorSplines = {
+								[0] = {
+									[0.207650273224044] = { 0, RH = { 0.599271402550091, 0.234567901234568 }, Flags = { Linear = true } },
+									[0.726775956284153] = { 1.12592592592593, LH = { 0.553734061930783, 0.748148148148148 } }
+								}
+							},
+							SplineColor = { Red = 255, Green = 52, Blue = 52 },
+							CtrlWShown = false,
+							NameSet = true,
+						},
+						ColorCurves1Green = LUTBezier {
+							KeyColorSplines = {
+								[0] = {
+									[0.207650273224044] = { 0, RH = { 0.599271402550091, 0.234567901234568 }, Flags = { Linear = true } },
+									[0.726775956284153] = { 1.12592592592593, LH = { 0.553734061930783, 0.748148148148148 } }
+								}
+							},
+							SplineColor = { Red = 0, Green = 255, Blue = 0 },
+							CtrlWShown = false,
+							NameSet = true,
+						},
+						ColorCurves1Alpha = LUTBezier {
+							KeyColorSplines = {
+								[0] = {
+									[0.207650273224044] = { 0, RH = { 0.599271402550091, 0.234567901234568 }, Flags = { Linear = true } },
+									[0.726775956284153] = { 1.12592592592593, LH = { 0.553734061930783, 0.748148148148148 } }
+								}
+							},
+							SplineColor = { Red = 204, Green = 204, Blue = 204 },
+							CtrlWShown = false,
+							NameSet = true,
+						},
+						ColorCurves1Blue = LUTBezier {
+							KeyColorSplines = {
+								[0] = {
+									[0.207650273224044] = { 0, RH = { 0.599271402550091, 0.234567901234568 }, Flags = { Linear = true } },
+									[0.726775956284153] = { 1.12592592592593, LH = { 0.553734061930783, 0.748148148148148 } }
+								}
+							},
+							SplineColor = { Red = 68, Green = 68, Blue = 255 },
+							CtrlWShown = false,
+							NameSet = true,
+						}
+					},
+				},
+				Transform1 = Transform {
+					Inputs = {
+						ProcessRed = Input { Value = 0, },
+						Center = Input {
+							SourceOp = "Shake3",
+							Source = "Position",
+						},
+						Edges = Input { Value = 2, },
+						Input = Input {
+							SourceOp = "Displace1",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 408, 105.182 } },
+				},
+				Shake3 = Shake {
+					CtrlWZoom = false,
+					Inputs = {
+						Smoothness = Input { Value = 0.01, },
+					},
+				},
+				Displace1 = Displace {
+					Inputs = {
+						MotionBlur = Input { Value = 1, },
+						Type = Input { Value = 1, },
+						Channel = Input { Value = 0, },
+						XChannel = Input { Value = 4, },
+						XRefraction = Input {
+							SourceOp = "Shake2",
+							Source = "X",
+						},
+						YChannel = Input { Value = 4, },
+						RefractionStrength = Input { Value = 2, },
+						Spread = Input {
+							SourceOp = "Shake1",
+							Source = "X",
+						},
+						LightChannel = Input { Value = 5, },
+						Foreground = Input {
+							SourceOp = "ColorCurves1",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 299.333, 103.97 } },
+				},
+				Shake2 = Shake {
+					CtrlWZoom = false,
+					Inputs = {
+						Smoothness = Input { Value = 0.01, },
+						XMaximum = Input { Value = 3, },
+					},
+				},
+				Shake1 = Shake {
+					CtrlWZoom = false,
+					Inputs = {
+						Smoothness = Input { Value = 0.01, },
+					},
+				}
+			},
+		}
+	},
+	ActiveTool = "thaiphotosglitchtransition"
+}

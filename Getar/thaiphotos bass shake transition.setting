@@ -1,0 +1,115 @@
+{
+	Tools = ordered() {
+		thaiphotosbassshaketransition = MacroOperator {
+			Inputs = ordered() {
+				MainInput1 = InstanceInput {
+					SourceOp = "Transform1",
+					Source = "Input",
+				},
+				Input1 = InstanceInput {
+					SourceOp = "Shake1",
+					Source = "RandomSeed",
+					Default = 0,
+				},
+			},
+			Outputs = {
+				Output1 = InstanceOutput {
+					SourceOp = "Shake1",
+					Source = "X",
+				},
+				Output2 = InstanceOutput {
+					SourceOp = "Shake1",
+					Source = "Y",
+				},
+				MainOutput1 = InstanceOutput {
+					SourceOp = "LensDistort1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = GroupInfo { Pos = { 0, 0 } },
+			Tools = ordered() {
+				Transform1 = Transform {
+					CtrlWZoom = false,
+					Inputs = {
+						MotionBlur = Input { Value = 1, },
+						Quality = Input { Value = 3, },
+						ShutterAngle = Input { Value = 200, },
+						Center = Input {
+							SourceOp = "Shake1",
+							Source = "Position",
+						},
+						Edges = Input { Value = 3, },
+						ReferenceSize = Input { Value = 1, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 194.719, 48.5758 } },
+				},
+				Shake1 = Shake {
+					CtrlWZoom = false,
+					Inputs = {
+						Smoothness = Input { Value = 1.97, },
+						XMinimum = Input {
+							SourceOp = "ShakeonTransform1Minimum",
+							Source = "Value",
+						},
+						XMaximum = Input {
+							SourceOp = "ShakeonTransform1Maximum",
+							Source = "Value",
+						},
+					},
+				},
+				ShakeonTransform1Minimum = BezierSpline {
+					SplineColor = { Red = 216, Green = 101, Blue = 245 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0.008, RH = { 4.46, 0.328 }, Flags = { Linear = true } },
+						[12] = { 0.4, LH = { 5.2, 0.366 } }
+					}
+				},
+				ShakeonTransform1Maximum = BezierSpline {
+					SplineColor = { Red = 145, Green = 101, Blue = 245 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 1, RH = { 3.58, 0.7 }, Flags = { Linear = true } },
+						[12] = { 0.6, LH = { 6.2, 0.623999999999999 } }
+					}
+				},
+				LensDistort1 = LensDistort {
+					Inputs = {
+						Mode = Input { Value = 0, },
+						LensDistortionModel = Input { Value = 1, },
+						["DEClassicLDModel.Distortion"] = Input { Value = -0.125, },
+						CameraSettings = Input { Value = 1, },
+						Input = Input {
+							SourceOp = "PrismBlur1",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 414.719, 48.5758 } },
+				},
+				PrismBlur1 = ofx.com.blackmagicdesign.resolvefx.prismblur {
+					Inputs = {
+						Source = Input {
+							SourceOp = "Transform1",
+							Source = "Output",
+						},
+						BlurStrength = Input { Value = 0.200000002980232, },
+						CenterXPos = Input { Value = 0.5, },
+						CenterYPos = Input { Value = 0.5, },
+						AberrationDistance = Input { Value = 0.134, },
+						AberrationStrength = Input { Value = 0.400000005960464, },
+						VignetteSize = Input { Value = 0.100000001490116, },
+						VignetteSharpness = Input { Value = 5.28, },
+						BlendAmount = Input { Value = 0, },
+						blendGroup = Input { Value = 1, },
+						blend = Input { Value = 0, },
+						ignoreContentShape = Input { Value = 0, },
+						legacyIsProcessRGBOnly = Input { Value = 0, },
+						resolvefxVersion = Input { Value = "2.2", },
+					},
+					ViewInfo = OperatorInfo { Pos = { 304.719, 48.5758 } },
+				}
+			},
+		}
+	},
+	ActiveTool = "thaiphotosbassshaketransition"
+}

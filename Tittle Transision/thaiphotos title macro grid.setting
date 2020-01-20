@@ -1,0 +1,184 @@
+{
+	Tools = ordered() {
+		thaiphotostitlemacrogrid = MacroOperator {
+			Inputs = ordered() {
+				Input1 = InstanceInput {
+					SourceOp = "Template",
+					Source = "StyledText",
+				},
+				Input2 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Font",
+					ControlGroup = 2,
+				},
+				Input3 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Style",
+					ControlGroup = 2,
+				},
+				Input4 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Red1Clone",
+					Name = "Color",
+					ControlGroup = 3,
+					Default = 1,
+				},
+				Input5 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Green1Clone",
+					ControlGroup = 3,
+					Default = 1,
+				},
+				Input6 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Blue1Clone",
+					ControlGroup = 3,
+					Default = 1,
+				},
+				Input7 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Alpha1Clone",
+					ControlGroup = 3,
+					Default = 1,
+				},
+				Input8 = InstanceInput {
+					SourceOp = "Template",
+					Source = "Size",
+					Default = 0.1732,
+				},
+			},
+			Outputs = {
+				MainOutput1 = InstanceOutput {
+					SourceOp = "Displace1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = GroupInfo { Pos = { 0, 0 } },
+			Tools = ordered() {
+				Displace1 = Displace {
+					Inputs = {
+						Type = Input { Value = 1, },
+						XChannel = Input { Value = 4, },
+						XOffset = Input { Value = -0.5, },
+						XRefraction = Input {
+							SourceOp = "Displace1XRefraction",
+							Source = "Value",
+						},
+						YChannel = Input { Value = 4, },
+						YOffset = Input { Value = -0.5, },
+						RefractionStrength = Input { Value = 1.08, },
+						LightAngle = Input { Value = -26.7, },
+						LightChannel = Input { Value = 5, },
+						Input = Input {
+							SourceOp = "Template",
+							Source = "Output",
+						},
+						Foreground = Input {
+							SourceOp = "Grid1",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 469.334, 23.1212 } },
+				},
+				Displace1XRefraction = BezierSpline {
+					SplineColor = { Red = 251, Green = 59, Blue = 28 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0.1, RH = { 15.3333333333333, 0.1 }, Flags = { Linear = true } },
+						[46] = { 0.1, LH = { 30.6666666666667, 0.1 }, RH = { 54.6666666666667, 0.0666666666666667 }, Flags = { Linear = true } },
+						[72] = { 0, LH = { 63.3333333333333, 0.0333333333333333 }, RH = { 172, 0 }, Flags = { Linear = true } },
+						[372] = { 0, LH = { 272, 0 }, RH = { 396, -0.0333333333333333 }, Flags = { Linear = true } },
+						[444] = { -0.1, LH = { 420, -0.0666666666666667 }, Flags = { Linear = true } }
+					}
+				},
+				Grid1 = ofx.com.blackmagicdesign.resolvefx.grid {
+					Inputs = {
+						Source = Input {
+							SourceOp = "Template",
+							Source = "Output",
+						},
+						vernum = Input { Value = 66, },
+						hornum = Input { Value = 25, },
+						majorspace = Input { Value = 2, },
+						lineprop = Input { Value = 1, },
+						linecolorRed = Input { Value = 1, },
+						linecolorGreen = Input { Value = 1, },
+						linecolorBlue = Input { Value = 1, },
+						horwidth = Input { Value = 0.0500000007450581, },
+						verwidth = Input { Value = 0.0500000007450581, },
+						majorwidth = Input { Value = 2.5, },
+						tranform = Input { Value = 1, },
+						pan = Input { Value = 0, },
+						tilt = Input { Value = 0, },
+						zoom = Input { Value = 1, },
+						rotate = Input { Value = 0, },
+						gridwidth = Input { Value = 1, },
+						gridheight = Input { Value = 1, },
+						ShearX = Input { Value = 0, },
+						ShearY = Input { Value = 0, },
+						pitch = Input { Value = 0, },
+						yaw = Input { Value = 0, },
+						blendGroup = Input { Value = 1, },
+						blend = Input { Value = 0, },
+						ignoreContentShape = Input { Value = 0, },
+						resolvefxVersion = Input { Value = "1.0", },
+					},
+					ViewInfo = OperatorInfo { Pos = { 449.526, 97.7024 } },
+				},
+				Template = TextPlus {
+					CtrlWZoom = false,
+					Inputs = {
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						CharacterSpacing = Input {
+							SourceOp = "TemplateCharacterSpacing",
+							Source = "Value",
+						},
+						TransformSize = Input { Value = 1, },
+						Opacity1 = Input {
+							SourceOp = "TemplateOpacity",
+							Source = "Value",
+						},
+						StyledText = Input { Value = "FREE", },
+						Font = Input { Value = "Bebas Neue", },
+						Style = Input { Value = "Regular", },
+						Size = Input { Value = 0.1732, },
+						VerticalJustificationNew = Input { Value = 3, },
+						HorizontalJustificationNew = Input { Value = 3, },
+						AdvancedFontControls = Input { Value = 1, },
+						ManualFontKerningPlacement = Input {
+							Value = StyledText {
+								Array = {
+								},
+								Value = ""
+							},
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 54, 24.3788 } },
+				},
+				TemplateCharacterSpacing = BezierSpline {
+					SplineColor = { Red = 28, Green = 216, Blue = 243 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0.9, RH = { 24.0156148324647, 0.950032530900968 }, Flags = { Linear = true } },
+						[72] = { 1.1, LH = { 48, 1.1 }, RH = { 172, 1.1 } },
+						[372] = { 1.1, LH = { 272, 1.1 }, RH = { 396, 1.11666666666667 }, Flags = { Linear = true } },
+						[444] = { 1.15, LH = { 420, 1.13333333333333 }, Flags = { Linear = true } }
+					}
+				},
+				TemplateOpacity = BezierSpline {
+					SplineColor = { Red = 179, Green = 28, Blue = 244 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0, RH = { 24, 0.333333333333333 }, Flags = { Linear = true } },
+						[72] = { 1, LH = { 48, 0.666666666666667 }, RH = { 172, 1 }, Flags = { Linear = true } },
+						[372] = { 1, LH = { 272, 1 }, RH = { 396, 0.666666666666667 }, Flags = { Linear = true } },
+						[444] = { 0, LH = { 420, 0.333333333333333 }, Flags = { Linear = true } }
+					}
+				}
+			},
+		}
+	},
+	ActiveTool = "thaiphotostitlemacrogrid"
+}

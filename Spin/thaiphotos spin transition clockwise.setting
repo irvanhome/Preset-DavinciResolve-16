@@ -1,0 +1,128 @@
+{
+	Tools = ordered() {
+		thaiphotosspintransitionclockwise = MacroOperator {
+			Inputs = ordered() {
+				MainInput1 = InstanceInput {
+					SourceOp = "Transform1",
+					Source = "Input",
+				},
+			},
+			Outputs = {
+				MainOutput1 = InstanceOutput {
+					SourceOp = "PrismBlur1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = GroupInfo { Pos = { 0, 0 } },
+			Tools = ordered() {
+				LensDistort1 = LensDistort {
+					Inputs = {
+						LensDistortionModel = Input { Value = 1, },
+						["DEClassicLDModel.Distortion"] = Input {
+							SourceOp = "LensDistort1Distortion",
+							Source = "Value",
+						},
+						Input = Input {
+							SourceOp = "RadialBlur1",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 385.667, 49.5 } },
+				},
+				LensDistort1Distortion = BezierSpline {
+					SplineColor = { Red = 41, Green = 243, Blue = 241 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0, RH = { 4.76, 0.008 }, Flags = { Linear = true } },
+						[6] = { 0.5, LH = { 4, 0.333333333333333 }, RH = { 8.66666666666667, 0.333333333333333 } },
+						[14] = { 0, LH = { 7.5, 0.018 } }
+					}
+				},
+				PrismBlur1 = ofx.com.blackmagicdesign.resolvefx.prismblur {
+					Inputs = {
+						Source = Input {
+							SourceOp = "LensDistort1",
+							Source = "Output",
+						},
+						BlurStrength = Input { Value = 0, },
+						CenterXPos = Input { Value = 0.5, },
+						CenterYPos = Input { Value = 0.5, },
+						AberrationDistance = Input { Value = 0.0500000007450581, },
+						AberrationStrength = Input { Value = 0.400000005960464, },
+						VignetteSize = Input { Value = 0.100000001490116, },
+						VignetteSharpness = Input { Value = 5, },
+						BlendAmount = Input { Value = 0, },
+						blendGroup = Input { Value = 1, },
+						blend = Input {
+							SourceOp = "PrismBlur1Blend",
+							Source = "Value",
+						},
+						ignoreContentShape = Input { Value = 0, },
+						resolvefxVersion = Input { Value = "2.2", },
+					},
+					ViewInfo = OperatorInfo { Pos = { 495.667, 49.5 } },
+				},
+				PrismBlur1Blend = BezierSpline {
+					SplineColor = { Red = 205, Green = 205, Blue = 205 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 1, RH = { 4, 1 }, Flags = { Linear = true } },
+						[6] = { 0, LH = { 4, 0.333333333333333 }, RH = { 8.66666666666667, 0.333333333333333 } },
+						[14] = { 1, LH = { 8.1, 0.995999999999999 } }
+					}
+				},
+				RadialBlur1 = ofx.com.blackmagicdesign.resolvefx.radialblur {
+					Inputs = {
+						Source = Input {
+							SourceOp = "Transform1",
+							Source = "Output",
+						},
+						SmoothStrength = Input {
+							SourceOp = "RadialBlur1SmoothStrength",
+							Source = "Value",
+						},
+						CenterXPos = Input { Value = 0.5, },
+						CenterYPos = Input { Value = 0.5, },
+						BorderType = Input { Value = FuID { "BORDER_TYPE_REPLICATE" }, },
+						BlendAmount = Input { Value = 0, },
+						blendGroup = Input { Value = 1, },
+						blend = Input { Value = 0, },
+						ignoreContentShape = Input { Value = 0, },
+						resolvefxVersion = Input { Value = "2.2", },
+					},
+					ViewInfo = OperatorInfo { Pos = { 275, 49.5 } },
+				},
+				RadialBlur1SmoothStrength = BezierSpline {
+					SplineColor = { Red = 240, Green = 190, Blue = 242 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0.2, RH = { 5, 0.199 }, Flags = { Linear = true } },
+						[6] = { 1, LH = { 4, 0.8 }, RH = { 8.98481634760472, 0.744158598776738 } },
+						[14] = { 0.196, LH = { 7.23428571428571, 0.197142857142857 } }
+					}
+				},
+				Transform1 = Transform {
+					CtrlWZoom = false,
+					Inputs = {
+						MotionBlur = Input { Value = 1, },
+						Angle = Input {
+							SourceOp = "Transform1Angle",
+							Source = "Value",
+						},
+						Edges = Input { Value = 3, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 165, 49.5 } },
+				},
+				Transform1Angle = BezierSpline {
+					SplineColor = { Red = 14, Green = 221, Blue = 144 },
+					NameSet = true,
+					KeyFrames = {
+						[0] = { 0, RH = { 8.29, 0 }, Flags = { Linear = true } },
+						[14] = { -360, LH = { 3.66, -361 } }
+					}
+				}
+			},
+		}
+	},
+	ActiveTool = "thaiphotosspintransitionclockwise"
+}
